@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.bdqn.vo.ZiXueStudent" table="crm_zistudent">
+		<id name="zid" column="zid">
+			<generator class="native"></generator>
+		</id>
+		<property name="ziName" column="ziName"></property>
+		<property name="addtre" column="addtre"></property>
+		<property name="beiZhu" column="beiZhu"></property>
+		<property name="xueli" column="xueli"></property>
+		<property name="ziage" column="ziage"></property>
+		<property name="ziqq" column="ziqq"></property>
+		<property name="zisex" column="zisex"></property>
+		<property name="zishoot" column="zishoot"></property>
+		<property name="zphone" column="zphone" ></property>
+		<!-- 一对多 -->
+		<many-to-one lazy="false" fetch="join" name="classLie" column="z_id" class="com.bdqn.vo.ClassLie"></many-to-one>
+	</class>
+</hibernate-mapping>

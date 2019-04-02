@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+<!-- 引入外部属性文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+
+	<!-- 配置连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClass}"/>
+		<property name="jdbcUrl" value="${jdbc.url}"/>
+		<property name="user" value="${jdbc.user}"/>
+		<property name="password" value="${jdbc.password}"/>
+	</bean>
+	
+	<!-- 配置Hibernate的属性 -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		
+		<!-- Hibernate属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.connection.autocommit">false</prop>
+			</props>
+		</property>
+	<!-- 配置hibernate 映射文件 -->
+		<property name="mappingResources">
+				<list>
+					<value>com/bdqn/vo/Department.hbm.xml</value>
+					<value>com/bdqn/vo/Employee.hbm.xml</value>
+					<value>com/bdqn/vo/CategoryB.hbm.xml</value>
+					<value>com/bdqn/vo/ClassLie.hbm.xml</value>
+					<value>com/bdqn/vo/ZiXueStudent.hbm.xml</value>
+					<value>com/bdqn/vo/Student.hbm.xml</value>
+				</list>
+		</property>
+	</bean>
+	<!-- 学生 -->
+	<bean id="stuDao" class="com.bdqn.dao.StudentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="stuService" class="com.bdqn.service.StudentServiceImpl">
+		<property name="stuDao" ref="stuDao"></property>
+		<property name="zaiService" ref="zaiService"></property>
+	</bean>
+	<bean id="stuAction" class="com.bdqn.action.StudentAction" scope="prototype">
+		<property name="stuService" ref="stuService"></property>
+		<property name="cls" ref="banService"></property>
+	</bean>
+	<!-- 在校学生 -->
+	<bean id="zaiDao" class="com.bdqn.dao.ZiXueStudentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="zaiService" class="com.bdqn.service.ZaiXiaoStudentServiceImpl">
+		<property name="zsd" ref="zaiDao"></property>
+	</bean>
+	<bean id="zaiAction" class="com.bdqn.action.ZaiXiaoStudentAction" scope="prototype">
+		<property name="zaiService" ref="zaiService"></property>
+		<property name="cls" ref="banService"></property>
+	</bean>
+	<!-- 班级 -->
+	<bean id="banDao" class="com.bdqn.dao.ClassLieDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="banService" class="com.bdqn.service.ClassLieServiceImpl">
+		<property name="banDao" ref="banDao"></property>
+	</bean>
+	<bean id="banAction" class="com.bdqn.action.ClassLieAction" scope="prototype">
+		<property name="banService" ref="banService"></property>
+		<property name="cb" ref="cbs"></property>
+	</bean>
+	<!-- 课程 -->
+	<bean id="cbd" class="com.bdqn.dao.CategoryBDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="cbs" class="com.bdqn.service.CategoryBServiceImpl">
+		<property name="cbd" ref="cbd"></property>
+	</bean>
+	<bean id="cba" class="com.bdqn.action.CategoryBAction" scope="prototype">
+		<property name="cbs" ref="cbs"></property>
+	</bean>
+	<!-- 员工 -->
+	<bean id="empDao" class="com.bdqn.dao.EmployeeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="empService" class="com.bdqn.service.EmployeeServiceImpl">
+		<property name="empDao" ref="empDao"></property>
+	</bean>
+	<bean id="empAction" class="com.bdqn.action.EmployeeAction" scope="prototype">
+		<property name="empService" ref="empService"></property>
+		<property name="departmentService" ref="departmentService"></property>
+	</bean>
+	<!-- 部门 -->
+	<bean id="departmentDao" class="com.bdqn.dao.DepartmentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="departmentService" class="com.bdqn.service.DepartmentServiceImpl">
+		<property name="departmentDao" ref="departmentDao"></property>
+	</bean>
+	<bean id="departmentAction" class="com.bdqn.action.DepartmentAction">
+		<property name="departmentService" ref="departmentService"></property>
+	</bean>
+	
+	<!-- 配置事务管理: -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 开启注解事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+</beans>

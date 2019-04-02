@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.bdqn.vo.CategoryB" table="crm_category">
+		<id name="cid" column="cid">
+			<generator class="native"></generator>
+		</id>
+		<property name="cateName" column="cateName"></property>
+		<property name="intrdJie" column="intrdJie"></property>
+		<property name="xuetime" column="xuetime"></property>
+		<property name="xuePrice" column="xuePrice"></property>
+		<!-- 一对多 -->
+		<set name="classLies"  cascade="delete">
+			<key column="c_id"></key>
+			<one-to-many class="com.bdqn.vo.ClassLie"/>
+		</set>
+	</class>
+</hibernate-mapping>

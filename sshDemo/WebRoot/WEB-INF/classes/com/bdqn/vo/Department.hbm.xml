@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.bdqn.vo.Department" table="crm_department">
+		<id name="did" column="did">
+			<generator class="native"></generator>
+		</id>
+		<property name="deptName" column="deName"></property>
+		<property name="introduce" column="introduce"></property>
+		<!-- 一对多 -->
+		<set name="employees" cascade="delete">
+			<key column="de_id"></key>
+			<one-to-many class="com.bdqn.vo.Employee"/>
+		</set>
+	</class>
+</hibernate-mapping>

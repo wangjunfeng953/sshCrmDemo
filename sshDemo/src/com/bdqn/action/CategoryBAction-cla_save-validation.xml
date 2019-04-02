@@ -1,0 +1,27 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+  		"-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+	<field name="cateName">
+		<field-validator type="requiredstring">
+			<message>名字不能为空!</message>
+		</field-validator>
+	</field>
+
+	<field name="xuetime">
+		<field-validator type="requiredstring">
+			<message>学时不能为空!</message>
+		</field-validator>
+	</field>
+	<field name="xuePrice">
+		<field-validator type="requiredstring">
+			<message>学费不能为空!</message>
+		</field-validator>
+	</field>
+	<field name="intrdJie">
+		<field-validator type="requiredstring">
+			<message>课程简介不能为空!</message>
+		</field-validator>
+	</field>
+</validators> -->

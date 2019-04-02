@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.bdqn.vo.ClassLie" table="crm_classban">
+		<id name="bid" column="bid">
+			<generator class="native"></generator>
+		</id>
+		<property name="cbName" column="cbName"></property>
+		<property name="intoDay" column="intoDay"></property>
+		<property name="outDay" column="outDay"></property>
+		<property name="statZ" column="statZ"></property>
+		<property name="clNum" column="clNum"></property>
+		<many-to-one name="categoryB" fetch="join" column="c_id" class="com.bdqn.vo.CategoryB">
+		</many-to-one>
+ 	</class>
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.bdqn.vo.Employee" table="crm_employee">
+		<id name="eid" column="eid">
+			<generator class="native"></generator>
+		</id>
+		<property name="empName" column="empName"></property>
+		<property name="birthday" column="birthday"></property>
+		<property name="entryDay" column="entryDay"></property>
+		<property name="eNum" column="eNum"></property>
+		<property name="esex" column="esex"></property>
+		<property name="loginName" column="loginName"></property>
+		<property name="loginPwd" column="loginPwd"></property>
+		<many-to-one name="department"  fetch="join" column="de_id" class="com.bdqn.vo.Department">
+		</many-to-one>										
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.ui.theme" value="simple"></constant>
+	<package name="crm" extends="struts-default" namespace="/">
+		<action name="emp_*" class="empAction" method="{1}">
+		<result name="registUiSuccess">/html/emp/register.jsp</result>
+		<result name="input">/html/emp/register.jsp</result>
+		<result name="registSuccess">/html/login.jsp</result>
+		<result name="loginSuccess">/html/frame.jsp</result>
+		<result name="LoginInput">/html/login.jsp</result>
+		<result name="empAndPageSuccess">/html/emp/listStaff.jsp</result>
+		<result name="deleteSuccess" type="redirectAction">emp_employPage</result>
+		<result name="updateSuccess" type="redirectAction">emp_employPage</result>
+		<result name="updateUiSuccess">/html/emp/update.jsp</result>
+		<result name="saveUiSuccess">/html/emp/save.jsp</result>
+		<result name="saveSuccess" type="redirectAction">emp_employPage</result>
+		</action>
+		<action name="dept_*" class="departmentAction" method="{1}">
+			<result name="deptAndPageSuccess">/html/dept/listDep.jsp</result>
+			<result name="saveUiSuccess">/html/dept/addDept.jsp</result>
+			<result name="saveSuccess" type="redirectAction">dept_department</result>
+			<result name="updateUiSuccess">/html/dept/update.jsp</result>
+			<result name="updateSuccess" type="redirectAction">dept_department</result>
+			<result name="deleteSuccess" type="redirectAction">dept_department</result>
+		</action>
+		<action name="cla_*" class="cba" method="{1}">
+			<result name="findPageSuccess">/html/lesson/listLesson.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">cla_cateAndPage</result>
+			<result name="updateUiSuccess">/html/lesson/update.jsp</result>
+			<result name="updateSuccess" type="redirectAction">cla_cateAndPage</result>
+			<result name="saveUiSuccess">/html/lesson/addlesson.jsp</result>
+			<result name="saveSuccess" type="redirectAction">cla_cateAndPage</result>
+			<result name="input">/html/lesson/addlesson.jsp</result>
+			<result name="queryCategoryUiSuccess">/html/lesson/querylesson.jsp</result>
+			<result name="queryCategorySuccess">/html/lesson/queryList.jsp</result>
+		</action>
+		<action name="ban_*" class="banAction" method="{1}">
+			<result name="andpageSuccess">/html/classesm/listClass.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">ban_findByAndPage</result>
+			<result name="updateUiSuccess">/html/classesm/updateClass.jsp</result>
+			<result name="updateSuccess" type="redirectAction">ban_findByAndPage</result>
+			<result name="addSaveClassUiSuccess">/html/classesm/addClass.jsp</result>
+			<result name="addSaveClassSuccess" type="redirectAction">ban_findByAndPage</result>
+			<result name="queryClassUiSuccess">/html/classesm/querylesson.jsp</result>
+			<result name="queryClassLieSuccess">/html/classesm/queryList.jsp</result>
+		</action>
+		<action name="in_*" class="zaiAction" method="{1}">
+			<result name="StuPageSuccess">/html/zaixiao/inStudent.jsp</result>
+			<result name="inupdateUiSuccess">/html/zaixiao/inupdateStu.jsp</result>
+			<result name="inupdateUisSuccess">/html/zaixiao/find.jsp</result>
+			<result name="updateStuSuccess" type="redirectAction">in_StuPage</result>
+			<result name="queryzaiSuccess">/html/zaixiao/querylesson.jsp</result>
+			<result name="queryZaisXiaoSuccess">/html/zaixiao/queryList.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">in_StuPage</result>
+			<result name="saveUiSuccess">/html/zaixiao/addZai.jsp</result>
+			<result name="saveSuccess" type="redirectAction">in_StuPage</result>
+		</action>
+		<action name="zi_*" class="stuAction" method="{1}">
+			<result name="findzixunByPageSuccess">/html/student/listStudent.jsp</result>
+			<result name="deleteZiSuccess" type="redirectAction">zi_findzixunByPage</result>
+			<result name="stuUpdateUiSuccess">/html/student/updateStu.jsp</result>
+			<result name="stuUpdateSuccess" type="redirectAction">zi_findzixunByPage</result>
+			<result name="addZiStudentUiSuccess">/html/student/addziStudent.jsp</result>
+			<result name="addZiStudentSuccess" type="redirectAction">zi_findzixunByPage</result>
+			<result name="inClassUiSuccess">/html/student/inClass.jsp</result>
+			<result name="inClassCGSuccess" type="redirectAction">zi_findzixunByPage</result>
+			<result name="gaojiUiSuccess">/html/student/querylesson.jsp</result>
+			<result name="queryZiXunSuccess">/html/student/queryList.jsp</result>
+		</action>
+	</package>
+</struts>
